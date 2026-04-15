@@ -1,0 +1,240 @@
+﻿
+Smart City AI-Based Issue Reporting System 
+Frontend Design - Complete Structure
+
+1. Overview
+The frontend of the system is designed to support four types of users:
+1. 👤 Citizen 
+2. 👮 Officer (Department Supervisor) 
+3. 👷 Worker (Field Staff) 
+4. 🛠 Admin 
+Each user has separate pages and dashboards, but all are connected through a common workflow.
+
+ 2. Total Frontend Pages
+👉 Minimum Pages: 15
+👉 Maximum Pages: 17
+RolePagesCitizen4-5Officer5Worker3Admin3-4
+👤 3. Citizen Interface (4-5 Pages)
+
+🔐 1. Login / Register Page
+Purpose:
+Allows users to create an account and log in.
+Features:
+* Email & password input 
+* Registration form 
+* Authentication 
+
+🏠 2. Dashboard (Home Page)
+Purpose:
+Main entry point after login.
+Features:
+* "Report Issue" button 
+* "My Complaints" button 
+* Summary: 
+o Total complaints 
+o Pending / Resolved 
+
+📸 3. Submit Complaint Page ⭐
+Purpose:
+Core functionality of the system.
+Features:
+* Image upload 
+* Description field 
+* Map (GPS / pin location) 
+* Submit button 
+* (Optional) AI detection preview 
+
+📋 4. My Complaints Page
+Purpose:
+Track submitted complaints.
+Features:
+* Complaint list 
+* Status (Pending / In Progress / Resolved) 
+* Date & issue type 
+* Filtering 
+
+🔍 5. Complaint Details Page (Optional)
+Purpose:
+Detailed view of a complaint.
+Features:
+* Full image 
+* Location map 
+* Status updates 
+* Resolution proof 
+
+👮 4. Officer Interface (5 Pages)
+👉 Same pages for all departments (Traffic, Municipal, Infrastructure)
+
+🏠 1. Officer Dashboard ⭐
+Purpose:
+View all complaints assigned to the department.
+Features:
+* Complaint list (table/cards) 
+* Filters: 
+o Priority 
+o Status 
+* Actions: 
+o View details 
+o Assign to worker 
+
+🔍 2. Complaint Details Page
+Purpose:
+View full complaint information.
+Features:
+* Image 
+* Issue type 
+* Location 
+* Priority 
+* Description 
+
+👷 3. Assign to Worker Page / Modal ⭐
+Purpose:
+Assign complaint to a worker.
+Features:
+* Worker list 
+* Assign button 
+
+📊 4. Track Assigned Complaints
+Purpose:
+Monitor worker progress.
+Features:
+* Assigned worker name 
+* Status updates 
+* Completion tracking 
+
+👤 5. Profile / Logout (Optional)
+Purpose:
+Basic account management.
+
+👷 5. Worker Interface (3 Pages)
+
+🏠 1. Worker Dashboard ⭐
+Purpose:
+View assigned tasks.
+Features:
+* Task list 
+* Status (Pending / In Progress / Completed) 
+
+🔍 2. Task Details Page
+Purpose:
+View task information.
+Features:
+* Complaint image 
+* Location 
+* Instructions 
+
+🔄 3. Update Status Page ⭐
+Purpose:
+Update task progress.
+Features:
+* Mark "In Progress" 
+* Mark "Completed" 
+* Upload proof image 
+
+🛠 6. Admin Interface (3-4 Pages)
+
+📊 1. Admin Dashboard
+Purpose:
+System overview.
+
+👥 2. Manage Users
+Purpose:
+Manage officers and workers.
+
+🏢 3. Manage Departments
+Purpose:
+Control department structure.
+
+📈 4. Analytics (Optional)
+Purpose:
+View reports and insights.
+
+FULL SYSTEM WORKFLOW DIAGRAM (TEXT FORMAT)
+
+[Start]
+
+      ↓
+Citizen Login / Register
+      ↓
+Citizen Dashboard
+      ↓
+Submit Complaint
+      ↓
+Upload Image + Add Location + Description
+      ↓
+[Validation Check]
+(Is image + location provided?)
+      ↓
+YES ---------------------- NO
+↓                          ↓
+Proceed                Show Error
+
+      ↓
+[Image Validity Check (AI)]
+(Is image relevant or fake?)
+      ↓
+VALID -------------------- INVALID
+↓                          ↓
+Proceed                Reject Image
+
+      ↓
+[AI Detection (YOLO)]
+Detect Issue Type + Confidence
+      ↓
+Confidence ≥ 0.75 ? 
+      ↓
+YES ---------------------- NO
+↓                          ↓
+Auto Select Issue       Manual Selection Required
+
+      ↓
+[Duplicate Detection]
+(Check: location + time + issue type)
+      ↓
+Duplicate Found?
+      ↓
+YES ---------------------- NO
+↓                          ↓
+Link to Existing       Create New Complaint
+
+      ↓
+[Priority Calculation]
+(Based on issue + location + duplicates)
+      ↓
+Assign Priority Level
+
+      ↓
+[Department Routing]
+(Issue → Department Mapping)
+      ↓
+Send to Department Dashboard
+
+      ↓
+[Officer Dashboard]
+Officer Views Complaint
+      ↓
+Assign to Worker / Sub-staff
+      ↓
+Worker Accepts Task
+      ↓
+Status → "In Progress"
+
+      ↓
+Worker Fixes Issue
+      ↓
+Upload Proof Image + Notes
+      ↓
+Status → "Resolved"
+
+      ↓
+Officer Verification
+      ↓
+Approve Resolution
+
+      ↓
+Citizen Gets Notification
+      ↓
+Citizen Views Status
+
+      ↓
+[End]
